@@ -1,4 +1,5 @@
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 import { signIn } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import classes from './auth-form.module.css'
@@ -21,15 +22,10 @@ async function createUser(email, password) {
 	return data
 }
 
-function AuthForm() {
+function AuthForm({ isLogin }) {
 	const emailInputRef = useRef()
 	const passwordInputRef = useRef()
-	const [isLogin, setIsLogin] = useState(true)
 	const router = useRouter()
-
-	function switchAuthModeHandler() {
-		setIsLogin((prevState) => !prevState)
-	}
 
 	async function submitHandler(event) {
 		event.preventDefault()
@@ -75,13 +71,12 @@ function AuthForm() {
 				</div>
 				<div className={classes.actions}>
 					<button>{isLogin ? 'Login' : 'Create Account'}</button>
-					<button
-						type='button'
+					<Link
+						href={isLogin ? '/signup' : '/login'}
 						className={classes.toggle}
-						onClick={switchAuthModeHandler}
 					>
 						{isLogin ? 'Create new account' : 'Login with existing account'}
-					</button>
+					</Link>
 				</div>
 			</form>
 		</section>

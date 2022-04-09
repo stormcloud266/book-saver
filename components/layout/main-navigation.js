@@ -18,9 +18,14 @@ function MainNavigation() {
 			<nav>
 				<ul>
 					{!session && !loading && (
-						<li>
-							<Link href='/auth'>Login</Link>
-						</li>
+						<>
+							<li>
+								<Link href='/login'>Login</Link>
+							</li>
+							<li>
+								<Link href='/signup'>Create Account</Link>
+							</li>
+						</>
 					)}
 					{session && (
 						<>

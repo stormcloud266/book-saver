@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
-import Image from 'next/image'
 import StartingPageContent from '../components/starting-page/starting-page'
+import BookCard from '../components/book/book-card'
 const test = require('../test.json')
 
 function HomePage() {
@@ -67,28 +67,8 @@ function HomePage() {
 			{loading && <h2>loading...</h2>}
 			{error && <h2>error...</h2>}
 
-			{test.docs.map(({ title, first_publish_year, cover_i, id_goodreads }) => (
-				<div key={cover_i}>
-					<p>
-						<b>{title}</b>
-					</p>
-					<p>
-						<small>{first_publish_year}</small>
-					</p>
-					<Image
-						layout='intrinsic'
-						width={200}
-						height={300}
-						src={`https://covers.openlibrary.org/b/id/${cover_i}-M.jpg`}
-					/>
-					{/* <a
-						href={`https://www.goodreads.com/book/show/${id_goodreads[0]}`}
-						target='_blank'
-						rel='noopener noreferrer'
-					>
-						Open In Goodreads
-					</a> */}
-				</div>
+			{test.docs.map((book) => (
+				<BookCard book={book} key={book.key} />
 			))}
 
 			{/* {books && !error && (
