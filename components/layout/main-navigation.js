@@ -33,6 +33,9 @@ function MainNavigation() {
 								<Link href='/profile'>Profile</Link>
 							</li>
 							<li>
+								<Link href='/favorites'>Favorites</Link>
+							</li>
+							<li>
 								<button onClick={logoutHandler}>Logout</button>
 							</li>
 						</>
