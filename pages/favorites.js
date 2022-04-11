@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react'
 import BookCard from '../components/book/book-card'
+import { useFavorites } from '../context/favorites-context'
 // import * as styles from './favorites.module.scss'
 
 const Favorites = () => {
-	const [favorites, setFavorites] = useState([])
-
-	useEffect(async () => {
-		const results = await fetch('/api/user/favorites')
-		const data = await results.json()
-		setFavorites(data.favorites)
-	}, [])
+	const { favorites } = useFavorites()
 
 	return (
 		<div>
-			{favorites.map((book) => (
-				<BookCard book={book} key={book.key} />
-			))}
+			{!favorites || favorites.length === 0 ? (
+				<p>no favorites</p>
+			) : (
+				favorites.map((book) => (
+					<BookCard
+						title={book.title}
+						first_publish_year={book.first_publish_year}
+						cover_i={book.cover_i}
+						id_goodreads={book.id_goodreads}
+						book_id={book.book_id}
+						key={book.book_id}
+					/>
+				))
+			)}
 		</div>
 	)
 }

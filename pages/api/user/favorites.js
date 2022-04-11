@@ -66,8 +66,9 @@ async function handler(req, res) {
 			return
 		}
 
-		const isFavorite = user.favorites.find((item) => item.key === book.key)
-		console.log('isFavorite: ', isFavorite)
+		const isFavorite = user.favorites.find(
+			(item) => item.book_id === book.book_id
+		)
 
 		if (!isFavorite) {
 			// add favorite

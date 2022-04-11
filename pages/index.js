@@ -68,7 +68,14 @@ function HomePage() {
 			{error && <h2>error...</h2>}
 
 			{test.docs.map((book) => (
-				<BookCard book={book} key={book.key} />
+				<BookCard
+					title={book.title}
+					first_publish_year={book.first_publish_year}
+					cover_i={book.cover_i}
+					id_goodreads={book.id_goodreads}
+					book_id={book.key}
+					key={book.key}
+				/>
 			))}
 
 			{/* {books && !error && (
