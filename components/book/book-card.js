@@ -9,6 +9,7 @@ const BookCard = ({
 	cover_i,
 	id_goodreads,
 	book_id,
+	isLoggedIn,
 }) => {
 	const book = { title, first_publish_year, cover_i, id_goodreads, book_id }
 	const { favorites, setFavorites } = useFavorites()
@@ -48,14 +49,16 @@ const BookCard = ({
 			<p>
 				<b>{title}</b>
 			</p>
-			<button
-				style={{
-					backgroundColor: isFavorite ? 'pink' : 'lightgray',
-				}}
-				onClick={toggleFavorite}
-			>
-				fav
-			</button>
+			{isLoggedIn && (
+				<button
+					style={{
+						backgroundColor: isFavorite ? 'pink' : 'lightgray',
+					}}
+					onClick={toggleFavorite}
+				>
+					fav
+				</button>
+			)}
 			<p>
 				<small>{first_publish_year}</small>
 			</p>

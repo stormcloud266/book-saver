@@ -8,16 +8,18 @@ export const useFavorites = () => {
 
 export const FavoritesProvider = ({ children }) => {
 	const [favorites, setFavorites] = useState([])
+	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(async () => {
 		const results = await fetch('/api/user/favorites')
 		const data = await results.json()
 		const favorites = !data.favorites ? [] : data.favorites
+		setIsLoaded(true)
 		setFavorites(favorites)
 	}, [])
 
 	return (
-		<FavoritesContext.Provider value={{ favorites, setFavorites }}>
+		<FavoritesContext.Provider value={{ favorites, setFavorites, isLoaded }}>
 			{children}
 		</FavoritesContext.Provider>
 	)

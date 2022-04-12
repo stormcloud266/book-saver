@@ -1,6 +1,9 @@
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
+import { getSession } from 'next-auth/client'
+import { useFavorites } from '../context/favorites-context'
 import StartingPageContent from '../components/starting-page/starting-page'
 import BookCard from '../components/book/book-card'
+
 const test = require('../test.json')
 
 function HomePage() {
@@ -10,6 +13,14 @@ function HomePage() {
 	const [books, setBooks] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
+	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const { isLoaded } = useFavorites()
+
+	useEffect(() => {
+		getSession().then((session) => {
+			setIsLoggedIn(!!session)
+		})
+	}, [])
 
 	const submitHandler = async (event) => {
 		event.preventDefault()
@@ -75,6 +86,7 @@ function HomePage() {
 					id_goodreads={book.id_goodreads}
 					book_id={book.key}
 					key={book.key}
+					isLoggedIn={isLoggedIn && isLoaded}
 				/>
 			))}
 
