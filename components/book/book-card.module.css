@@ -3,6 +3,8 @@
 	border-radius: 4px;
 	overflow: hidden;
 	position: relative;
+	display: flex;
+	flex-direction: column;
 }
 
 .imageContainer {
@@ -14,6 +16,10 @@
 
 .textContainer {
 	padding: 1.4rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 1;
 }
 
 .favorite {
@@ -23,17 +29,33 @@
 	position: absolute;
 	top: 0.6rem;
 	right: 0.6rem;
+	cursor: pointer;
 }
 
 .title {
 	margin-bottom: 0.4rem;
 }
 
-.year {
-}
-
 .year small {
-	opacity: 0.7;
+	color: #a3a3b1;
 	font-style: italic;
 	margin-right: 0.6rem;
+}
+
+.button {
+	background-color: hsl(240, 25%, 46%);
+	color: hsl(240, 20%, 96%);
+	text-decoration: none;
+	width: 100%;
+	text-align: center;
+	display: block;
+	padding: 0.6rem;
+	margin-top: 1.4rem;
+	transition: all 0.2s;
+	border-radius: 4px;
+}
+
+.button:hover {
+	background-color: hsl(240, 80%, 68%);
+	color: white;
 }

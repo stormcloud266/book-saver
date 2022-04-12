@@ -1,0 +1,36 @@
+.container {
+	margin-top: 3rem;
+	display: flex;
+	justify-content: center;
+}
+
+.form {
+	width: 100%;
+	max-width: 320px;
+}
+
+.input {
+	background-color: hsl(240, 6%, 22%);
+	font-family: inherit;
+	font-size: inherit;
+	border: none;
+	outline: none;
+	border-radius: 4px;
+	padding: 8px 16px;
+	color: inherit;
+	width: 100%;
+}
+
+.radioSection {
+	display: flex;
+	margin-top: 0.8rem;
+}
+
+.radioContainer {
+	margin-right: 2rem;
+}
+
+.radioContainer label {
+	color: #a3a3b1;
+	margin-right: 0.4rem;
+}

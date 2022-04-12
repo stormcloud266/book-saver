@@ -17,6 +17,9 @@ function MainNavigation() {
 			</Link>
 			<nav>
 				<ul>
+					<li>
+						<Link href='/'>Search</Link>
+					</li>
 					{!session && !loading && (
 						<>
 							<li>
@@ -30,10 +33,10 @@ function MainNavigation() {
 					{session && (
 						<>
 							<li>
-								<Link href='/profile'>Profile</Link>
+								<Link href='/favorites'>Favorites</Link>
 							</li>
 							<li>
-								<Link href='/favorites'>Favorites</Link>
+								<Link href='/profile'>Profile</Link>
 							</li>
 							<li>
 								<button onClick={logoutHandler}>Logout</button>

@@ -1,7 +1,7 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { getSession } from 'next-auth/client'
 import { useFavorites } from '../context/favorites-context'
-import StartingPageContent from '../components/starting-page/starting-page'
+import Search from '../components/search/search'
 import BookCard from '../components/book/book-card'
 import Grid from '../components/grid/grid'
 
@@ -9,8 +9,6 @@ const test = require('../test.json')
 
 function HomePage() {
 	// return <StartingPageContent />;
-	const searchRef = useRef()
-	const [isTitle, setIsTitle] = useState(true)
 	const [books, setBooks] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
@@ -23,58 +21,9 @@ function HomePage() {
 		})
 	}, [])
 
-	const submitHandler = async (event) => {
-		event.preventDefault()
-
-		setLoading(true)
-		setError(false)
-		setBooks(undefined)
-
-		const response = await fetch(
-			`http://openlibrary.org/search.json?${
-				isTitle ? 'title' : 'author'
-			}=${encodeURI(searchRef.current.value)}&limit=2`
-		)
-
-		const data = await response.json()
-
-		if (!response.ok) {
-			setLoading(false)
-			setError(true)
-			return
-		}
-
-		setBooks(data)
-		setLoading(false)
-	}
-
-	const radioHandler = (event) => {
-		setIsTitle(event.target.value === 'book')
-	}
-
 	return (
 		<div>
-			<form onSubmit={submitHandler}>
-				<input type='text' placeholder='search' ref={searchRef} />
-				<label>
-					<input
-						type='radio'
-						value='book'
-						checked={isTitle}
-						onChange={radioHandler}
-					/>
-					Title
-				</label>
-				<label>
-					<input
-						type='radio'
-						value='author'
-						checked={!isTitle}
-						onChange={radioHandler}
-					/>
-					Author
-				</label>
-			</form>
+			<Search setLoading={setLoading} setError={setError} setBooks={setBooks} />
 
 			{loading && <h2>loading...</h2>}
 			{error && <h2>error...</h2>}

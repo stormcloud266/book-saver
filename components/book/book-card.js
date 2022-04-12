@@ -75,21 +75,25 @@ const BookCard = ({
 			)}
 
 			<div className={styles.textContainer}>
-				<h3 className={styles.title}>{title}</h3>
+				<div>
+					<h3 className={styles.title}>{title}</h3>
 
-				<p className={styles.year}>
-					<small>Published:</small>
-					{first_publish_year}
-				</p>
+					<p className={styles.year}>
+						<small>Published:</small>
+						{first_publish_year}
+					</p>
+				</div>
 
-				{/* <a
+				{id_goodreads && (
+					<a
 						href={`https://www.goodreads.com/book/show/${id_goodreads[0]}`}
 						target='_blank'
 						rel='noopener noreferrer'
+						className={styles.button}
 					>
 						Open In Goodreads
-					</a> 
-				*/}
+					</a>
+				)}
 			</div>
 		</div>
 	)
