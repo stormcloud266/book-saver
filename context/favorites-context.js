@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react'
+import { getSession } from 'next-auth/client'
 
 const FavoritesContext = createContext()
 
@@ -11,11 +12,15 @@ export const FavoritesProvider = ({ children }) => {
 	const [isLoaded, setIsLoaded] = useState(false)
 
 	useEffect(async () => {
-		const results = await fetch('/api/user/favorites')
-		const data = await results.json()
-		const favorites = !data.favorites ? [] : data.favorites
-		setIsLoaded(true)
-		setFavorites(favorites)
+		const session = await getSession()
+
+		if (session) {
+			const results = await fetch('/api/user/favorites')
+			const data = await results.json()
+			const favorites = !data.favorites ? [] : data.favorites
+			setIsLoaded(true)
+			setFavorites(favorites)
+		}
 	}, [])
 
 	return (

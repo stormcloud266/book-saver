@@ -1,13 +1,16 @@
+import { getSession } from 'next-auth/client'
 import BookCard from '../components/book/book-card'
 import { useFavorites } from '../context/favorites-context'
 // import * as styles from './favorites.module.scss'
 
 const Favorites = () => {
-	const { favorites } = useFavorites()
+	const { favorites, isLoaded } = useFavorites()
 
 	return (
 		<div>
-			{!favorites || favorites.length === 0 ? (
+			{!isLoaded && <h2>loading</h2>}
+
+			{isLoaded && (!favorites || favorites.length === 0) ? (
 				<p>no favorites</p>
 			) : (
 				favorites.map((book) => (
@@ -18,11 +21,28 @@ const Favorites = () => {
 						id_goodreads={book.id_goodreads}
 						book_id={book.book_id}
 						key={book.book_id}
+						isLoggedIn={isLoaded}
 					/>
 				))
 			)}
 		</div>
 	)
+}
+export async function getServerSideProps(context) {
+	const session = await getSession({ req: context.req })
+
+	if (!session) {
+		return {
+			redirect: {
+				destination: '/',
+				permanent: false,
+			},
+		}
+	}
+
+	return {
+		props: { session },
+	}
 }
 
 export default Favorites
