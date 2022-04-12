@@ -26,9 +26,13 @@ function AuthForm({ isLogin }) {
 	const emailInputRef = useRef()
 	const passwordInputRef = useRef()
 	const router = useRouter()
+	const [loading, setLoading] = useState(false)
+	const [error, setError] = useState(false)
 
 	async function submitHandler(event) {
 		event.preventDefault()
+		setLoading(true)
+		setError(false)
 		const enteredEmail = emailInputRef.current.value
 		const enteredPassword = passwordInputRef.current.value
 
@@ -39,9 +43,14 @@ function AuthForm({ isLogin }) {
 				password: enteredPassword,
 			})
 
+			setLoading(false)
+
 			if (!result.error) {
 				router.replace('/profile')
+				return
 			}
+
+			setError(true)
 		} else {
 			try {
 				const result = await createUser(enteredEmail, enteredPassword)
@@ -57,9 +66,9 @@ function AuthForm({ isLogin }) {
 				} else {
 					throw new Error('Could not create account')
 				}
-				console.log(result)
 			} catch (error) {
-				console.log(error)
+				setLoading(false)
+				setError(true)
 			}
 		}
 	}
@@ -91,6 +100,8 @@ function AuthForm({ isLogin }) {
 					</Link>
 				</div>
 			</form>
+			{loading && <h2>loading...</h2>}
+			{error && <h2>error, please try again</h2>}
 		</section>
 	)
 }
