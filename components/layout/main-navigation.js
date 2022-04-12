@@ -12,7 +12,7 @@ function MainNavigation() {
 		<header className={classes.header}>
 			<Link href='/'>
 				<a>
-					<div className={classes.logo}>Next Auth</div>
+					<div className={classes.logo}>Book Saver</div>
 				</a>
 			</Link>
 			<nav>

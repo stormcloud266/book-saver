@@ -3,6 +3,7 @@ import { getSession } from 'next-auth/client'
 import { useFavorites } from '../context/favorites-context'
 import StartingPageContent from '../components/starting-page/starting-page'
 import BookCard from '../components/book/book-card'
+import Grid from '../components/grid/grid'
 
 const test = require('../test.json')
 
@@ -78,17 +79,19 @@ function HomePage() {
 			{loading && <h2>loading...</h2>}
 			{error && <h2>error...</h2>}
 
-			{test.docs.map((book) => (
-				<BookCard
-					title={book.title}
-					first_publish_year={book.first_publish_year}
-					cover_i={book.cover_i}
-					id_goodreads={book.id_goodreads}
-					book_id={book.key}
-					key={book.key}
-					isLoggedIn={isLoggedIn && isLoaded}
-				/>
-			))}
+			<Grid>
+				{test.docs.map((book) => (
+					<BookCard
+						title={book.title}
+						first_publish_year={book.first_publish_year}
+						cover_i={book.cover_i}
+						id_goodreads={book.id_goodreads}
+						book_id={book.key}
+						key={book.key}
+						isLoggedIn={isLoggedIn && isLoaded}
+					/>
+				))}
+			</Grid>
 
 			{/* {books && !error && (
 				<div>

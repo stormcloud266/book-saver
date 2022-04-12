@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
-// import * as styles from './book-card.module.scss'
+import styles from './book-card.module.css'
 import { useFavorites } from '../../context/favorites-context'
 
 const BookCard = ({
@@ -48,37 +48,41 @@ const BookCard = ({
 	}
 
 	return (
-		<div>
-			<p>
-				<b>{title}</b>
-			</p>
-			{isLoggedIn && (
-				<button
-					style={{
-						backgroundColor: isFavorite ? 'pink' : 'lightgray',
-					}}
-					onClick={toggleFavorite}
-				>
-					fav
-				</button>
-			)}
-			<p>
-				<small>{first_publish_year}</small>
-			</p>
-
-			<div
-				style={{
-					height: '300px',
-					maxWidth: '180px',
-					position: 'relative',
-					backgroundColor: 'black',
-					overflow: 'hidden',
-					borderRadius: 4,
-				}}
-			>
+		<div className={styles.card}>
+			<div className={styles.imageContainer}>
 				<Image height={300} width={180} objectFit='contain' src={imageUrl} />
 			</div>
-			{/* <a
+
+			{isLoggedIn && (
+				<button className={styles.favorite} onClick={toggleFavorite}>
+					<svg
+						xmlns='http://www.w3.org/2000/svg'
+						className='h-6 w-6'
+						fill={isFavorite ? 'pink' : 'none'}
+						viewBox='0 0 24 24'
+						stroke={isFavorite ? 'pink' : '#8b8bac'}
+						strokeWidth={2}
+						height={26}
+						width={26}
+					>
+						<path
+							strokeLinecap='round'
+							strokeLinejoin='round'
+							d='M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z'
+						/>
+					</svg>
+				</button>
+			)}
+
+			<div className={styles.textContainer}>
+				<h3 className={styles.title}>{title}</h3>
+
+				<p className={styles.year}>
+					<small>Published:</small>
+					{first_publish_year}
+				</p>
+
+				{/* <a
 						href={`https://www.goodreads.com/book/show/${id_goodreads[0]}`}
 						target='_blank'
 						rel='noopener noreferrer'
@@ -86,6 +90,7 @@ const BookCard = ({
 						Open In Goodreads
 					</a> 
 				*/}
+			</div>
 		</div>
 	)
 }
