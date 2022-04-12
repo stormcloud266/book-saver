@@ -20,6 +20,7 @@ async function handler(req, res) {
 		res.status(422).json({
 			message:
 				'Please enter valid email and password with at least 7 characters',
+			success: false,
 		})
 		return
 	}
@@ -34,6 +35,7 @@ async function handler(req, res) {
 	if (existingUser) {
 		res.status(422).json({
 			message: 'Email already in use',
+			success: false,
 		})
 		client.close()
 		return
@@ -49,7 +51,7 @@ async function handler(req, res) {
 	})
 
 	// sends success status and closes db connection after adding user
-	res.status(201).json({ message: 'Signed up successfully!' })
+	res.status(201).json({ message: 'Signed up successfully!', success: true })
 	client.close()
 }
 

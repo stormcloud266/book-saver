@@ -45,6 +45,18 @@ function AuthForm({ isLogin }) {
 		} else {
 			try {
 				const result = await createUser(enteredEmail, enteredPassword)
+				if (result.success) {
+					const result = await signIn('credentials', {
+						redirect: false,
+						email: enteredEmail,
+						password: enteredPassword,
+					})
+					if (!result.error) {
+						router.replace('/profile')
+					}
+				} else {
+					throw new Error('Could not create account')
+				}
 				console.log(result)
 			} catch (error) {
 				console.log(error)
