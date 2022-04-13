@@ -32,26 +32,13 @@
 
 .header a {
 	text-decoration: none;
+}
+
+.link {
 	color: #d4d4e0;
 	transition: all 0.2s;
 }
 
-.header button {
-	font: inherit;
-	background-color: transparent;
-	border: 1px solid hsl(240, 80%, 79%);
+.link:hover {
 	color: hsl(240, 80%, 79%);
-	padding: 0.5rem 1.5rem;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: all 0.2s;
-}
-
-.header a:hover {
-	color: hsl(240, 80%, 79%);
-}
-
-.header button:hover {
-	background-color: hsl(240, 80%, 79%);
-	color: #1c1c20;
 }

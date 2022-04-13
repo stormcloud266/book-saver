@@ -21,28 +21,40 @@ function MainNavigation() {
 				<nav>
 					<ul>
 						<li>
-							<Link href='/'>Search</Link>
+							<Link href='/'>
+								<a className={classes.link}>Search</a>
+							</Link>
 						</li>
 						{!session && !loading && (
 							<>
 								<li>
-									<Link href='/login'>Login</Link>
+									<Link href='/login' className={classes.link}>
+										<a className={classes.link}>Login</a>
+									</Link>
 								</li>
 								<li>
-									<Link href='/signup'>Create Account</Link>
+									<Link href='/signup'>
+										<a className='button secondary'>Create Account</a>
+									</Link>
 								</li>
 							</>
 						)}
 						{session && (
 							<>
 								<li>
-									<Link href='/favorites'>Favorites</Link>
+									<Link href='/favorites'>
+										<a className={classes.link}>Favorites</a>
+									</Link>
 								</li>
 								<li>
-									<Link href='/profile'>Profile</Link>
+									<Link href='/account'>
+										<a className={classes.link}>Account</a>
+									</Link>
 								</li>
 								<li>
-									<button onClick={logoutHandler}>Logout</button>
+									<button onClick={logoutHandler} className='button secondary'>
+										Logout
+									</button>
 								</li>
 							</>
 						)}

@@ -11,6 +11,7 @@ body {
 	margin: 0;
 	background-color: #1c1c20;
 	color: #eaeaee;
+	position: relative;
 }
 
 h1,
@@ -61,4 +62,29 @@ h6 {
 	border: 1px solid hsl(0, 54%, 56%);
 	background-color: transparent;
 	color: hsl(0, 54%, 66%);
+}
+
+.button.secondary {
+	font: inherit;
+	background-color: transparent;
+	border: 1px solid hsl(240, 80%, 79%);
+	color: hsl(240, 80%, 79%);
+	padding: 0.5rem 1.5rem;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all 0.2s;
+}
+
+.message {
+	position: absolute;
+	top: 8rem;
+	left: 50%;
+	transform: translateX(-50%);
+	font-family: 'Poppins', sans-serif;
+	font-size: 2rem;
+	color: hsl(240, 80%, 79%);
+}
+
+.message.mt {
+	top: 15rem;
 }

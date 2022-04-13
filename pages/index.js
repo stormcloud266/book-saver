@@ -25,10 +25,10 @@ function HomePage() {
 		<div>
 			<Search setLoading={setLoading} setError={setError} setBooks={setBooks} />
 
-			{loading && <h2>loading...</h2>}
-			{error && <h2>error...</h2>}
-			{books?.numFound === 0 && <h2>no results</h2>}
-			{(!books || books?.numFound === 0) && <Placeholder />}
+			{loading && <p className='message mt'>Loading...</p>}
+			{error && <p className='message mt'>Please try another search</p>}
+			{books?.numFound === 0 && <p className='message mt'>No results</p>}
+			{(!books || books?.numFound === 0) && !loading && <Placeholder />}
 
 			{books && !error && (
 				<Grid>

@@ -46,7 +46,7 @@ function AuthForm({ isLogin }) {
 			setLoading(false)
 
 			if (!result.error) {
-				router.replace('/profile')
+				router.replace('/account')
 				return
 			}
 
@@ -61,7 +61,7 @@ function AuthForm({ isLogin }) {
 						password: enteredPassword,
 					})
 					if (!result.error) {
-						router.replace('/profile')
+						router.replace('/account')
 					}
 				} else {
 					throw new Error('Could not create account')

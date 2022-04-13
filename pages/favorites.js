@@ -2,6 +2,7 @@ import { getSession } from 'next-auth/client'
 import BookCard from '../components/book/book-card'
 import Grid from '../components/grid/grid'
 import { useFavorites } from '../context/favorites-context'
+import Placeholder from '../components/placeholder/placeholder'
 // import * as styles from './favorites.module.scss'
 
 const Favorites = () => {
@@ -9,10 +10,11 @@ const Favorites = () => {
 
 	return (
 		<div>
-			{!isLoaded && <h2>loading</h2>}
+			{!isLoaded && <p className='message'>Loading...</p>}
+			{(!favorites || favorites.length === 0) && <Placeholder />}
 
 			{isLoaded && (!favorites || favorites.length === 0) ? (
-				<p>no favorites</p>
+				<p className='message'>You have no favorites yet</p>
 			) : (
 				<Grid>
 					{favorites.map((book) => (
