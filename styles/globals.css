@@ -64,6 +64,11 @@ h6 {
 	color: hsl(0, 54%, 66%);
 }
 
+.button.warn:hover {
+	background-color: hsl(0, 54%, 56%);
+	color: white;
+}
+
 .button.secondary {
 	font: inherit;
 	background-color: transparent;
@@ -72,7 +77,12 @@ h6 {
 	padding: 0.5rem 1.5rem;
 	border-radius: 6px;
 	cursor: pointer;
-	transition: all 0.2s;
+}
+
+.button.secondary:hover {
+	border-color: hsl(240, 80%, 68%);
+	background-color: hsl(240, 80%, 68%);
+	color: white;
 }
 
 .message {
