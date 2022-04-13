@@ -1,8 +1,11 @@
+import { signOut } from 'next-auth/client'
+import { useRouter } from 'next/router'
 import ProfileForm from './profile-form'
+import DeleteForm from './delete-form'
 import classes from './user-profile.module.css'
 
 function UserProfile() {
-	// Redirect away if NOT auth
+	const router = useRouter()
 
 	async function changePasswordHandler(passwordData) {
 		const response = await fetch('/api/user/change-password', {
@@ -14,13 +17,31 @@ function UserProfile() {
 		})
 
 		const data = await response.json()
-		console.log('data: ', data)
+	}
+
+	async function deleteAccountHandler(accountData) {
+		const response = await fetch('/api/user/delete-account', {
+			method: 'DELETE',
+			body: JSON.stringify(accountData),
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		})
+
+		const data = await response.json()
+
+		if (data.success) {
+			signOut()
+			router.replace('/')
+		}
 	}
 
 	return (
 		<section className={classes.profile}>
-			<h1>Your User Profile</h1>
+			<h2>Change Password</h2>
 			<ProfileForm onChangePassword={changePasswordHandler} />
+			<h2>delete account</h2>
+			<DeleteForm onDeleteAccount={deleteAccountHandler} />
 		</section>
 	)
 }

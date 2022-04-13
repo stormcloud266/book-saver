@@ -1,9 +1,9 @@
 import { getSession } from 'next-auth/client'
 import { connectToDatabase } from '../../../lib/db'
-import { verifyPassword, hashPassword } from '../../../lib/auth'
+import { verifyPassword } from '../../../lib/auth'
 
 async function handler(req, res) {
-	if (req.method !== 'PATCH') return
+	if (req.method !== 'DELETE') return
 
 	const session = await getSession({ req })
 
@@ -13,8 +13,13 @@ async function handler(req, res) {
 	}
 
 	const userEmail = session.user.email
-	const oldPassword = req.body.oldPassword
-	const newPassword = req.body.newPassword
+	const enteredPassword = req.body.enteredPassword
+	const enteredEmail = req.body.enteredEmail
+
+	if (userEmail !== enteredEmail) {
+		res.status(404).json({ message: 'Incorrect email entered.' })
+		return
+	}
 
 	const client = await connectToDatabase()
 	const users = client.db().collection('users')
@@ -27,8 +32,10 @@ async function handler(req, res) {
 	}
 
 	const currentPassword = user.password
-
-	const passwordsAreEqual = await verifyPassword(oldPassword, currentPassword)
+	const passwordsAreEqual = await verifyPassword(
+		enteredPassword,
+		currentPassword
+	)
 
 	if (!passwordsAreEqual) {
 		res.status(403).json({ message: 'Invalid password' })
@@ -36,15 +43,10 @@ async function handler(req, res) {
 		return
 	}
 
-	const hashedPassword = await hashPassword(newPassword)
-
-	const result = await users.updateOne(
-		{ email: userEmail },
-		{ $set: { password: hashedPassword } }
-	)
+	const result = await users.deleteOne({ email: userEmail })
 
 	client.close()
-	res.status(200).json({ message: 'Password updated' })
+	res.status(200).json({ message: 'Account deleted', success: true })
 }
 
 export default handler
