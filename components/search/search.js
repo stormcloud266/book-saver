@@ -1,3 +1,4 @@
+import { Radio } from './radio'
 import { useRef, useState } from 'react'
 import styles from './search.module.css'
 
@@ -31,7 +32,7 @@ const Search = ({ setLoading, setError, setBooks }) => {
 	}
 
 	const radioHandler = (event) => {
-		setIsTitle(event.target.value === 'book')
+		setIsTitle(event.target.value === 'title')
 	}
 
 	return (
@@ -44,28 +45,12 @@ const Search = ({ setLoading, setError, setBooks }) => {
 					className={styles.input}
 				/>
 				<div className={styles.radioSection}>
-					<div className={styles.radioContainer}>
-						<label htmlFor='book'>Title</label>
-						<input
-							type='radio'
-							value='book'
-							id='book'
-							checked={isTitle}
-							onChange={radioHandler}
-							className={styles.radio}
-						/>
-					</div>
-					<div className={styles.radioContainer}>
-						<label htmlFor='author'>Author</label>
-						<input
-							type='radio'
-							value='author'
-							id='author'
-							checked={!isTitle}
-							onChange={radioHandler}
-							className={styles.radio}
-						/>
-					</div>
+					<Radio checked={isTitle} radioHandler={radioHandler} value='title' />
+					<Radio
+						checked={!isTitle}
+						radioHandler={radioHandler}
+						value='author'
+					/>
 				</div>
 			</form>
 		</div>

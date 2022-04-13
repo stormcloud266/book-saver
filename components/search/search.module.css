@@ -34,3 +34,40 @@
 	color: #a3a3b1;
 	margin-right: 0.4rem;
 }
+
+.radioLabel {
+	display: flex;
+	align-items: center;
+}
+
+.radioLabelText {
+	text-transform: capitalize;
+}
+
+.radioLabelDot {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	height: 16px;
+	width: 16px;
+	background-color: hsl(240, 80%, 68%);
+	border-radius: 100%;
+	margin-left: 0.4rem;
+	margin-bottom: -2px;
+}
+
+.radio:checked ~ label .radioLabelDot:after {
+	content: '';
+	display: block;
+	height: 8px;
+	width: 8px;
+	background-color: hsl(240, 100%, 94%);
+	border-radius: 100%;
+	position: absolute;
+}
+
+.radio {
+	position: absolute;
+	left: -3000px;
+}
