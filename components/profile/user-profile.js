@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { signOut } from 'next-auth/client'
 import { useRouter } from 'next/router'
 import ProfileForm from './profile-form'
@@ -6,6 +7,8 @@ import classes from './user-profile.module.css'
 
 function UserProfile() {
 	const router = useRouter()
+	const [deleteError, setDeleteError] = useState(false)
+	const [updateError, setUpdateError] = useState(false)
 
 	async function changePasswordHandler(passwordData) {
 		const response = await fetch('/api/user/change-password', {
@@ -17,9 +20,15 @@ function UserProfile() {
 		})
 
 		const data = await response.json()
+
+		if (!data.success) {
+			setUpdateError(true)
+		}
 	}
 
 	async function deleteAccountHandler(accountData) {
+		setDeleteError(false)
+
 		const response = await fetch('/api/user/delete-account', {
 			method: 'DELETE',
 			body: JSON.stringify(accountData),
@@ -33,6 +42,8 @@ function UserProfile() {
 		if (data.success) {
 			signOut()
 			router.replace('/')
+		} else {
+			setDeleteError(true)
 		}
 	}
 
@@ -40,8 +51,19 @@ function UserProfile() {
 		<section className={classes.profile}>
 			<h2>Change Password</h2>
 			<ProfileForm onChangePassword={changePasswordHandler} />
-			<h2>delete account</h2>
+			{updateError && (
+				<h2>
+					problem updating password. please check old password and try again.
+				</h2>
+			)}
+			<h2>Delete Account</h2>
 			<DeleteForm onDeleteAccount={deleteAccountHandler} />
+			{deleteError && (
+				<h2>
+					problem deleting account. please check email and password and try
+					again.
+				</h2>
+			)}
 		</section>
 	)
 }

@@ -9,6 +9,7 @@ function Layout(props) {
 			<main>
 				<div className='wrapper'>{props.children}</div>
 			</main>
+			<div id='modal'></div>
 		</Fragment>
 	)
 }

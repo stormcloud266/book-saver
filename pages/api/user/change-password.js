@@ -44,7 +44,7 @@ async function handler(req, res) {
 	)
 
 	client.close()
-	res.status(200).json({ message: 'Password updated' })
+	res.status(200).json({ message: 'Password updated', success: true })
 }
 
 export default handler
