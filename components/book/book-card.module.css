@@ -41,21 +41,3 @@
 	font-style: italic;
 	margin-right: 0.6rem;
 }
-
-.button {
-	background-color: hsl(240, 25%, 46%);
-	color: hsl(240, 20%, 96%);
-	text-decoration: none;
-	width: 100%;
-	text-align: center;
-	display: block;
-	padding: 0.6rem;
-	margin-top: 1.4rem;
-	transition: all 0.2s;
-	border-radius: 4px;
-}
-
-.button:hover {
-	background-color: hsl(240, 80%, 68%);
-	color: white;
-}

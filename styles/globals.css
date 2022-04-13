@@ -31,3 +31,34 @@ h6 {
 	padding-left: 1rem;
 	padding-right: 1rem;
 }
+
+.button {
+	border: 1px solid hsl(240, 25%, 46%);
+	background-color: hsl(240, 25%, 46%);
+	color: hsl(240, 20%, 96%);
+	text-decoration: none;
+	width: 100%;
+	text-align: center;
+	display: block;
+	padding: 0.6rem;
+	margin-top: 1.4rem;
+	transition: all 0.2s;
+	border-radius: 4px;
+	outline: none;
+	border: none;
+	font-family: 'Poppins', sans-serif;
+	font-size: inherit;
+	line-height: inherit;
+	cursor: pointer;
+}
+
+.button:hover {
+	background-color: hsl(240, 80%, 68%);
+	color: white;
+}
+
+.button.warn {
+	border: 1px solid hsl(0, 54%, 56%);
+	background-color: transparent;
+	color: hsl(0, 54%, 66%);
+}

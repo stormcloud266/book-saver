@@ -35,7 +35,7 @@ function ProfileForm({ onChangePassword }) {
 				/>
 			</div>
 			<div className={classes.action}>
-				<button>Change Password</button>
+				<button className='button'>Change Password</button>
 			</div>
 		</form>
 	)

@@ -42,13 +42,17 @@ function DeleteForm({ onDeleteAccount }) {
 					/>
 				</div>
 				<div className={classes.action}>
-					<button>Delete Account</button>
+					<button className='button warn'>Delete Address</button>
 				</div>
 			</form>
 			<Modal isOpen={modalIsOpen} onC>
 				<h2>This action cannot be reversed.</h2>
-				<button onClick={deleteAccount}>Delete Account</button>
-				<button onClick={() => setModalIsOpen(false)}>Go Back</button>
+				<button onClick={deleteAccount} className='button warn'>
+					Delete Account
+				</button>
+				<button onClick={() => setModalIsOpen(false)} className='button'>
+					Go Back
+				</button>
 			</Modal>
 		</>
 	)

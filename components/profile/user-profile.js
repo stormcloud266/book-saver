@@ -49,14 +49,14 @@ function UserProfile() {
 
 	return (
 		<section className={classes.profile}>
-			<h2>Change Password</h2>
+			<h2 className={classes.title}>Change Password</h2>
 			<ProfileForm onChangePassword={changePasswordHandler} />
 			{updateError && (
 				<h2>
 					problem updating password. please check old password and try again.
 				</h2>
 			)}
-			<h2>Delete Account</h2>
+			<h2 className={classes.title}>Delete Account</h2>
 			<DeleteForm onDeleteAccount={deleteAccountHandler} />
 			{deleteError && (
 				<h2>

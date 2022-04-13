@@ -89,7 +89,7 @@ const BookCard = ({
 						href={`https://www.goodreads.com/book/show/${id_goodreads[0]}`}
 						target='_blank'
 						rel='noopener noreferrer'
-						className={styles.button}
+						className='button'
 					>
 						Open In Goodreads
 					</a>
