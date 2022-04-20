@@ -1,4 +1,4 @@
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 import BookCard from '../components/book/book-card'
 import Grid from '../components/grid/grid'
 import { useFavorites } from '../context/favorites-context'

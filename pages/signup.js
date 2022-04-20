@@ -1,4 +1,4 @@
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 import AuthForm from '../components/auth/auth-form'
 
 function Signup() {

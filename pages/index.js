@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getSession } from 'next-auth/client'
+import { getSession } from 'next-auth/react'
 import { useFavorites } from '../context/favorites-context'
 import Search from '../components/search/search'
 import BookCard from '../components/book/book-card'

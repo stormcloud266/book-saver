@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { signOut } from 'next-auth/client'
+import { signOut } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import ProfileForm from './profile-form'
 import DeleteForm from './delete-form'

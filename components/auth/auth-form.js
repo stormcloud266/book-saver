@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react'
 import Link from 'next/link'
-import { signIn } from 'next-auth/client'
+import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import classes from './auth-form.module.css'
 

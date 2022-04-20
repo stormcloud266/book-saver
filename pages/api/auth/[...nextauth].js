@@ -1,18 +1,15 @@
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import CredentialsProvider from 'next-auth/providers/credentials'
 import { verifyPassword } from '../../../lib/auth'
 import { connectToDatabase } from '../../../lib/db'
-
-// [...nextauth].js catches all routes not otherwise specified in the api/auth folder
 
 export default NextAuth({
 	session: {
 		jwt: true,
 	},
-	// providers are services that can be used to sign in a user
+	secret: process.env.NEXTAUTH_SECRET,
 	providers: [
-		// The Credentials provider allows you to handle signing in with arbitrary credentials, such as a username and password, two-factor authentication or hardware device
-		Providers.Credentials({
+		CredentialsProvider({
 			async authorize(credentials) {
 				// connect to mongodb and users collection, tries to find a user with the supplied email
 				const client = await connectToDatabase()
