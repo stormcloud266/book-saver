@@ -11,27 +11,20 @@ export const FavoritesProvider = ({ children }) => {
 	const [favorites, setFavorites] = useState([])
 	const [isLoaded, setIsLoaded] = useState(false)
 
-	useEffect(() => {
-		const getFavorites = async () => {
-			const session = await getSession()
+	const getFavorites = async () => {
+		const session = await getSession()
 
-			if (session) {
-				const results = await fetch('/api/user/favorites')
-				const data = await results.json()
-				const favorites = !data.favorites ? [] : data.favorites
-				setIsLoaded(true)
-				setFavorites(favorites)
-			} else {
-				setIsLoaded(true)
-				setFavorites([])
-			}
+		if (session) {
+			const results = await fetch('/api/user/favorites')
+			const data = await results.json()
+			const favorites = !data.favorites ? [] : data.favorites
+			setIsLoaded(true)
+			setFavorites(favorites)
 		}
+	}
 
-		getFavorites().then((err) => {
-			if (err) {
-				console.log(err)
-			}
-		})
+	useEffect(() => {
+		getFavorites().catch((err) => console.log(err))
 	}, [])
 
 	return (
