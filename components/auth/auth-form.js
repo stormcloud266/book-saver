@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
+import { useFavorites } from '../../context/favorites-context'
 import classes from './auth-form.module.css'
 
 async function createUser(email, password) {
@@ -28,6 +29,7 @@ function AuthForm({ isLogin }) {
 	const router = useRouter()
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)
+	const { setUser } = useFavorites()
 
 	async function submitHandler(event) {
 		event.preventDefault()
@@ -46,6 +48,7 @@ function AuthForm({ isLogin }) {
 			setLoading(false)
 
 			if (!result.error) {
+				setUser(result.email)
 				router.replace('/account')
 				return
 			}

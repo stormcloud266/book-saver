@@ -8,6 +8,7 @@ export const useFavorites = () => {
 }
 
 export const FavoritesProvider = ({ children }) => {
+	const [user, setUser] = useState(null)
 	const [favorites, setFavorites] = useState([])
 	const [isLoaded, setIsLoaded] = useState(false)
 
@@ -25,10 +26,12 @@ export const FavoritesProvider = ({ children }) => {
 
 	useEffect(() => {
 		getFavorites().catch((err) => console.log(err))
-	}, [])
+	}, [user])
 
 	return (
-		<FavoritesContext.Provider value={{ favorites, setFavorites, isLoaded }}>
+		<FavoritesContext.Provider
+			value={{ favorites, setFavorites, isLoaded, setUser }}
+		>
 			{children}
 		</FavoritesContext.Provider>
 	)
