@@ -23,7 +23,7 @@ async function createUser(email, password) {
 	return data
 }
 
-function AuthForm({ isLogin }) {
+function AuthForm({ isLogin, providers }) {
 	const emailInputRef = useRef()
 	const passwordInputRef = useRef()
 	const router = useRouter()
@@ -45,15 +45,19 @@ function AuthForm({ isLogin }) {
 				password: enteredPassword,
 			})
 
+			console.log('______result_____')
+
 			setLoading(false)
 
 			if (!result.error) {
+				console.log('______!error_____')
+
 				setUser(result.email)
 				router.replace('/account')
-				return
+			} else {
+				setError(true)
+				console.log(result.error)
 			}
-
-			setError(true)
 		} else {
 			try {
 				const result = await createUser(enteredEmail, enteredPassword)
@@ -105,6 +109,14 @@ function AuthForm({ isLogin }) {
 			</form>
 			{loading && <h2>loading...</h2>}
 			{error && <h2>error, please try again</h2>}
+
+			{Object.values(providers).map((provider) => (
+				<div key={provider.name}>
+					<button onClick={() => signIn(provider.id)}>
+						Sign in with {provider.name}
+					</button>
+				</div>
+			))}
 		</section>
 	)
 }

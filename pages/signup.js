@@ -1,12 +1,13 @@
-import { getSession } from 'next-auth/react'
+import { getProviders, getSession } from 'next-auth/react'
 import AuthForm from '../components/auth/auth-form'
 
-function Signup() {
-	return <AuthForm />
+function Signup({ session, providers }) {
+	return <AuthForm session={session} providers={providers} />
 }
 
 export async function getServerSideProps(context) {
 	const session = await getSession({ req: context.req })
+	const providers = await getProviders()
 
 	if (session) {
 		return {
@@ -18,7 +19,7 @@ export async function getServerSideProps(context) {
 	}
 
 	return {
-		props: { session },
+		props: { session, providers },
 	}
 }
 

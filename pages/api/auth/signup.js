@@ -30,6 +30,7 @@ async function handler(req, res) {
 	const db = client.db()
 
 	const existingUser = await db.collection('users').findOne({ email })
+	console.log('existingUser: ', existingUser)
 
 	// sends error status if trying to sign up with an existing email
 	if (existingUser) {
