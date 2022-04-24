@@ -16,7 +16,7 @@ async function handler(req, res) {
 	const enteredPassword = req.body.enteredPassword
 	const enteredEmail = req.body.enteredEmail
 
-	if (userEmail !== enteredEmail) {
+	if (session.user.credentialsAccount && userEmail !== enteredEmail) {
 		res.status(404).json({ message: 'Incorrect email entered.' })
 		return
 	}
@@ -31,22 +31,28 @@ async function handler(req, res) {
 		return
 	}
 
-	const currentPassword = user.password
-	const passwordsAreEqual = await verifyPassword(
-		enteredPassword,
-		currentPassword
-	)
+	if (user.credentialsAccount) {
+		const currentPassword = user.password
+		const passwordsAreEqual = await verifyPassword(
+			enteredPassword,
+			currentPassword
+		)
+		if (!passwordsAreEqual) {
+			res.status(403).json({ message: 'Invalid password' })
+			client.close()
+			return
+		}
 
-	if (!passwordsAreEqual) {
-		res.status(403).json({ message: 'Invalid password' })
+		const result = await users.deleteOne({ email: userEmail })
 		client.close()
-		return
+		res.status(200).json({ message: 'Account deleted', success: true })
+	} else {
+		const accounts = client.db().collection('accounts')
+		const accountResult = await accounts.deleteOne({ userId: user._id })
+		const userResult = await users.deleteOne({ email: userEmail })
+		client.close()
+		res.status(200).json({ message: 'Account deleted', success: true })
 	}
-
-	const result = await users.deleteOne({ email: userEmail })
-
-	client.close()
-	res.status(200).json({ message: 'Account deleted', success: true })
 }
 
 export default handler

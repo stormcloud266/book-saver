@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
 import { verifyPassword } from '../../../lib/auth'
+import { connectToDatabase } from '../../../lib/db'
 import clientPromise from '../../../lib/mongodb'
 
 export default NextAuth({
@@ -10,6 +11,7 @@ export default NextAuth({
 		strategy: 'jwt',
 	},
 	secret: process.env.NEXTAUTH_SECRET,
+	adapter: MongoDBAdapter(clientPromise),
 	providers: [
 		GoogleProvider({
 			clientId: process.env.GOOGLE_CLIENT_ID,
@@ -23,7 +25,7 @@ export default NextAuth({
 			},
 			async authorize(credentials) {
 				// connect to mongodb and users collection, tries to find a user with the supplied email
-				const client = await clientPromise
+				const client = await connectToDatabase()
 				const usersCollection = client.db().collection('users')
 				const user = await usersCollection.findOne({ email: credentials.email })
 
@@ -47,9 +49,30 @@ export default NextAuth({
 
 				client.close()
 				// if email and password match return email. this will be visible on the front end, so don't return password
-				return { email: user.email }
+				return {
+					email: user.email,
+				}
 			},
 		}),
 	],
-	adapter: MongoDBAdapter(clientPromise),
+	callbacks: {
+		session: async ({ session }) => {
+			if (!session) return
+
+			const client = await connectToDatabase()
+			const usersCollection = client.db().collection('users')
+
+			const userData = await usersCollection.findOne({
+				email: session.user.email,
+			})
+
+			return {
+				user: {
+					id: userData._id,
+					email: userData.email,
+					credentialsAccount: userData.credentialsAccount,
+				},
+			}
+		},
+	},
 })

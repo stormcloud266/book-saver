@@ -49,6 +49,7 @@ async function handler(req, res) {
 	const result = await db.collection('users').insertOne({
 		email,
 		password: hashedPassword,
+		credentialsAccount: true,
 	})
 
 	// sends success status and closes db connection after adding user

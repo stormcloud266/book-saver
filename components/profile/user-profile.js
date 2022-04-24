@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import ProfileForm from './profile-form'
 import DeleteForm from './delete-form'
@@ -7,6 +7,7 @@ import classes from './user-profile.module.css'
 
 function UserProfile() {
 	const router = useRouter()
+	const { data: session } = useSession()
 	const [errorMessage, setErrorMessage] = useState(null)
 
 	useEffect(() => {
@@ -60,10 +61,17 @@ function UserProfile() {
 
 	return (
 		<section className={classes.profile}>
-			<h2 className={classes.title}>Change Password</h2>
-			<ProfileForm onChangePassword={changePasswordHandler} />
+			{session.user.credentialsAccount && (
+				<>
+					<h2 className={classes.title}>Change Password</h2>
+					<ProfileForm onChangePassword={changePasswordHandler} />
+				</>
+			)}
 			<h2 className={classes.title}>Delete Account</h2>
-			<DeleteForm onDeleteAccount={deleteAccountHandler} />
+			<DeleteForm
+				onDeleteAccount={deleteAccountHandler}
+				credentialsAccount={!!session.user.credentialsAccount}
+			/>
 			{errorMessage && <div className={classes.alert}>{errorMessage}</div>}
 		</section>
 	)
