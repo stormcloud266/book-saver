@@ -45,13 +45,9 @@ function AuthForm({ isLogin, providers }) {
 				password: enteredPassword,
 			})
 
-			console.log('______result_____')
-
 			setLoading(false)
 
 			if (!result.error) {
-				console.log('______!error_____')
-
 				setUser(result.email)
 				router.replace('/account')
 			} else {
@@ -110,13 +106,15 @@ function AuthForm({ isLogin, providers }) {
 			{loading && <h2>loading...</h2>}
 			{error && <h2>error, please try again</h2>}
 
-			{Object.values(providers).map((provider) => (
-				<div key={provider.name}>
-					<button onClick={() => signIn(provider.id)}>
-						Sign in with {provider.name}
-					</button>
-				</div>
-			))}
+			{Object.values(providers).map((provider) =>
+				provider.name !== 'Credentials' ? (
+					<div key={provider.name}>
+						<button onClick={() => signIn(provider.id)}>
+							Sign in with {provider.name}
+						</button>
+					</div>
+				) : null
+			)}
 		</section>
 	)
 }

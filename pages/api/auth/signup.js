@@ -1,5 +1,6 @@
 import { connectToDatabase } from '../../../lib/db'
 import { hashPassword } from '../../../lib/auth'
+import clientPromise from '../../../lib/mongodb'
 
 async function handler(req, res) {
 	// exits if request isn't a POST request
@@ -30,7 +31,6 @@ async function handler(req, res) {
 	const db = client.db()
 
 	const existingUser = await db.collection('users').findOne({ email })
-	console.log('existingUser: ', existingUser)
 
 	// sends error status if trying to sign up with an existing email
 	if (existingUser) {
@@ -54,6 +54,7 @@ async function handler(req, res) {
 	// sends success status and closes db connection after adding user
 	res.status(201).json({ message: 'Signed up successfully!', success: true })
 	client.close()
+	return { email }
 }
 
 export default handler
