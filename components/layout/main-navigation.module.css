@@ -9,7 +9,7 @@
 .logo {
 	font-family: 'Poppins', sans-serif;
 	font-size: 2rem;
-	color: hsl(240, 80%, 68%);
+	color: var(--color-button-cta);
 	margin: 0;
 }
 
@@ -35,10 +35,10 @@
 }
 
 .link {
-	color: #d4d4e0;
+	color: var(--color-link);
 	transition: all 0.2s;
 }
 
 .link:hover {
-	color: hsl(240, 80%, 79%);
+	color: var(--color-button-hover);
 }

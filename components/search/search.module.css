@@ -10,7 +10,7 @@
 }
 
 .input {
-	background-color: hsl(240, 6%, 22%);
+	background-color: var(--color-bg-input);
 	font-family: inherit;
 	font-size: inherit;
 	border: none;
@@ -51,7 +51,7 @@
 	position: relative;
 	height: 16px;
 	width: 16px;
-	background-color: hsl(240, 80%, 68%);
+	background-color: var(--color-button-cta);
 	border-radius: 100%;
 	margin-left: 0.4rem;
 	margin-bottom: -2px;

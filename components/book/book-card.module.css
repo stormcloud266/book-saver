@@ -1,5 +1,5 @@
 .card {
-	background-color: hsl(240, 4%, 18%);
+	background-color: var(--color-bg-light);
 	border-radius: 4px;
 	overflow: hidden;
 	position: relative;
@@ -8,7 +8,7 @@
 }
 
 .imageContainer {
-	background-color: hsl(240, 4%, 15%);
+	background-color: var(--color-bg-med);
 	padding: 0.8rem;
 	width: 100%;
 	text-align: center;

@@ -9,7 +9,7 @@
 }
 
 .input {
-	background-color: hsl(240, 6%, 22%);
+	background-color: var(--color-bg-input);
 	font-family: inherit;
 	font-size: inherit;
 	border: none;

@@ -6,10 +6,23 @@
 	padding: 0;
 }
 
+:root {
+	--color-bg: hsl(240, 7%, 12%);
+	--color-bg-med: hsl(240, 4%, 15%);
+	--color-bg-light: hsl(240, 4%, 18%);
+	--color-bg-input: hsl(240, 6%, 22%);
+	--color-button: hsl(240, 25%, 46%);
+	--color-button-cta: hsl(240, 80%, 68%);
+	--color: hsl(240, 25%, 46%);
+	--color-button-hover: hsl(240, 80%, 79%);
+	--color-link: hsl(240, 16%, 85%);
+	--color-warn-bg: hsl(0, 54%, 56%);
+	--color-warn-text: hsl(0, 54%, 66%);
+}
 body {
 	font-family: 'Open Sans', 'Lato', sans-serif;
 	margin: 0;
-	background-color: #1c1c20;
+	background-color: var(--color-bg);
 	color: #eaeaee;
 	position: relative;
 }
@@ -34,8 +47,8 @@ h6 {
 }
 
 .button {
-	border: 1px solid hsl(240, 25%, 46%);
-	background-color: hsl(240, 25%, 46%);
+	border: 1px solid var(--color-button);
+	background-color: var(--color-button);
 	color: hsl(240, 20%, 96%);
 	text-decoration: none;
 	width: 100%;
@@ -54,34 +67,34 @@ h6 {
 }
 
 .button:hover {
-	background-color: hsl(240, 80%, 68%);
+	background-color: var(--color-button-cta);
 	color: white;
 }
 
 .button.warn {
-	border: 1px solid hsl(0, 54%, 56%);
+	border: 1px solid var(--color-warn-bg);
 	background-color: transparent;
-	color: hsl(0, 54%, 66%);
+	color: var(--color-warn-text);
 }
 
 .button.warn:hover {
-	background-color: hsl(0, 54%, 56%);
+	background-color: var(--color-warn-bg);
 	color: white;
 }
 
 .button.secondary {
 	font: inherit;
 	background-color: transparent;
-	border: 1px solid hsl(240, 80%, 79%);
-	color: hsl(240, 80%, 79%);
+	border: 1px solid var(--color-button-hover);
+	color: var(--color-button-hover);
 	padding: 0.5rem 1.5rem;
 	border-radius: 6px;
 	cursor: pointer;
 }
 
 .button.secondary:hover {
-	border-color: hsl(240, 80%, 68%);
-	background-color: hsl(240, 80%, 68%);
+	border-color: var(--color-button-cta);
+	background-color: var(--color-button-cta);
 	color: white;
 }
 
@@ -92,7 +105,7 @@ h6 {
 	transform: translateX(-50%);
 	font-family: 'Poppins', sans-serif;
 	font-size: 2rem;
-	color: hsl(240, 80%, 79%);
+	color: var(--color-button-hover);
 }
 
 .message.mt {
