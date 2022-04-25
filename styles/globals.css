@@ -13,17 +13,19 @@
 	--color-bg-input: hsl(240, 6%, 22%);
 	--color-button: hsl(240, 25%, 46%);
 	--color-button-cta: hsl(240, 80%, 68%);
-	--color: hsl(240, 25%, 46%);
 	--color-button-hover: hsl(240, 80%, 79%);
-	--color-link: hsl(240, 16%, 85%);
 	--color-warn-bg: hsl(0, 54%, 56%);
 	--color-warn-text: hsl(0, 54%, 66%);
+	--color-text: hsl(240, 11%, 93%);
+	--color-text-secondary: hsl(240, 16%, 85%);
+	--color-text-tertiary: hsl(240, 12%, 72%);
+	--color-text-primary: hsl(0, 0%, 100%);
 }
 body {
 	font-family: 'Open Sans', 'Lato', sans-serif;
 	margin: 0;
 	background-color: var(--color-bg);
-	color: #eaeaee;
+	color: var(--color-text);
 	position: relative;
 }
 
@@ -34,7 +36,7 @@ h4,
 h5,
 h6 {
 	font-family: 'Poppins', sans-serif;
-	color: white;
+	color: var(--color-text-primary);
 }
 
 .wrapper {
@@ -49,7 +51,7 @@ h6 {
 .button {
 	border: 1px solid var(--color-button);
 	background-color: var(--color-button);
-	color: hsl(240, 20%, 96%);
+	color: var(--color-text);
 	text-decoration: none;
 	width: 100%;
 	text-align: center;
@@ -68,7 +70,7 @@ h6 {
 
 .button:hover {
 	background-color: var(--color-button-cta);
-	color: white;
+	color: var(--color-text-primary);
 }
 
 .button.warn {
@@ -79,7 +81,7 @@ h6 {
 
 .button.warn:hover {
 	background-color: var(--color-warn-bg);
-	color: white;
+	color: var(--color-text-primary);
 }
 
 .button.secondary {
@@ -95,7 +97,7 @@ h6 {
 .button.secondary:hover {
 	border-color: var(--color-button-cta);
 	background-color: var(--color-button-cta);
-	color: white;
+	color: var(--color-text-primary);
 }
 
 .message {

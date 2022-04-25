@@ -14,7 +14,7 @@
 }
 
 .logo span {
-	color: #d4d4e0;
+	color: var(--color-text-secondary);
 	margin-left: 1px;
 }
 
@@ -35,7 +35,7 @@
 }
 
 .link {
-	color: var(--color-link);
+	color: var(--color-text-secondary);
 	transition: all 0.2s;
 }
 

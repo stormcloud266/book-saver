@@ -31,7 +31,7 @@
 }
 
 .radioContainer label {
-	color: #a3a3b1;
+	color: var(--color-text-tertiary);
 	margin-right: 0.4rem;
 }
 
