@@ -23,34 +23,37 @@ function DeleteForm({ onDeleteAccount, credentialsAccount }) {
 
 	return (
 		<>
-			<form className={classes.form} onSubmit={submitHandler}>
-				{credentialsAccount && (
-					<>
-						<div className={classes.control}>
-							<label htmlFor='email'>Email Address</label>
-							<input
-								className={classes.input}
-								type='email'
-								id='email'
-								ref={emailRef}
-							/>
-						</div>
-						<div className={classes.control}>
-							<label htmlFor='Password'>Password</label>
-							<input
-								className={classes.input}
-								type='password'
-								id='password'
-								ref={passwordRef}
-							/>
-						</div>
-					</>
-				)}
+			<section className={classes.deleteContainer}>
+				<h2>Delete Account</h2>
+				<form className={classes.form} onSubmit={submitHandler}>
+					{credentialsAccount && (
+						<>
+							<div className={classes.control}>
+								<label htmlFor='email'>Email Address</label>
+								<input
+									className={classes.input}
+									type='email'
+									id='email'
+									ref={emailRef}
+								/>
+							</div>
+							<div className={classes.control}>
+								<label htmlFor='Password'>Password</label>
+								<input
+									className={classes.input}
+									type='password'
+									id='password'
+									ref={passwordRef}
+								/>
+							</div>
+						</>
+					)}
 
-				<div className={classes.action}>
-					<button className='button warn'>Delete Account</button>
-				</div>
-			</form>
+					<div className={classes.action}>
+						<button className='button warn'>Delete Account</button>
+					</div>
+				</form>
+			</section>
 			<Modal isOpen={modalIsOpen}>
 				<h2>This action cannot be reversed.</h2>
 				<button onClick={deleteAccount} className='button warn'>

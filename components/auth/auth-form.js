@@ -79,7 +79,8 @@ function AuthForm({ isLogin, providers }) {
 	return (
 		<section className={classes.auth}>
 			<h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
-			<form onSubmit={submitHandler}>
+
+			<form onSubmit={submitHandler} className={classes.form}>
 				<div className={classes.control}>
 					<label htmlFor='email'>Your Email</label>
 					<input type='email' id='email' required ref={emailInputRef} />
@@ -93,28 +94,35 @@ function AuthForm({ isLogin, providers }) {
 						ref={passwordInputRef}
 					/>
 				</div>
+
 				<div className={classes.actions}>
-					<button>{isLogin ? 'Login' : 'Create Account'}</button>
-					<Link
-						href={isLogin ? '/signup' : '/login'}
-						className={classes.toggle}
-					>
-						{isLogin ? 'Create new account' : 'Login with existing account'}
+					<button className='button'>
+						{isLogin ? 'Login' : 'Create Account'}
+					</button>
+
+					{Object.values(providers).map((provider) =>
+						provider.name !== 'Credentials' ? (
+							<div key={provider.name}>
+								<button
+									className='button secondary'
+									onClick={() => signIn(provider.id)}
+								>
+									Sign in with {provider.name}
+								</button>
+							</div>
+						) : null
+					)}
+
+					<Link href={isLogin ? '/signup' : '/login'}>
+						<a className={classes.link}>
+							{isLogin ? 'Create new account' : 'Login with existing account'}
+						</a>
 					</Link>
 				</div>
 			</form>
-			{loading && <h2>loading...</h2>}
-			{error && <h2>error, please try again</h2>}
 
-			{Object.values(providers).map((provider) =>
-				provider.name !== 'Credentials' ? (
-					<div key={provider.name}>
-						<button onClick={() => signIn(provider.id)}>
-							Sign in with {provider.name}
-						</button>
-					</div>
-				) : null
-			)}
+			{loading && <p className={classes.loading}>loading...</p>}
+			{error && <p className={classes.error}>error, please try again</p>}
 		</section>
 	)
 }

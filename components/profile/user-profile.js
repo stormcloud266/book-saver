@@ -62,12 +62,8 @@ function UserProfile() {
 	return (
 		<section className={classes.profile}>
 			{session.user.credentialsAccount && (
-				<>
-					<h2 className={classes.title}>Change Password</h2>
-					<ProfileForm onChangePassword={changePasswordHandler} />
-				</>
+				<ProfileForm onChangePassword={changePasswordHandler} />
 			)}
-			<h2 className={classes.title}>Delete Account</h2>
 			<DeleteForm
 				onDeleteAccount={deleteAccountHandler}
 				credentialsAccount={!!session.user.credentialsAccount}
