@@ -3,8 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from 'next-auth/providers/google'
 import { MongoDBAdapter } from '@next-auth/mongodb-adapter'
 import { verifyPassword } from '../../../lib/auth'
-import { connectToDatabase } from '../../../lib/db'
-import clientPromise from '../../../lib/mongodb'
+import { connectToDatabase, clientPromise, getUser } from '../../../lib/db'
 
 export default NextAuth({
 	session: {
@@ -26,8 +25,7 @@ export default NextAuth({
 			async authorize(credentials) {
 				// connect to mongodb and users collection, tries to find a user with the supplied email
 				const client = await connectToDatabase()
-				const usersCollection = client.db().collection('users')
-				const user = await usersCollection.findOne({ email: credentials.email })
+				const user = await getUser(client, credentials.email)
 
 				// error if there isn't a user with that email
 				if (!user) {
@@ -60,17 +58,13 @@ export default NextAuth({
 			if (!session) return
 
 			const client = await connectToDatabase()
-			const usersCollection = client.db().collection('users')
-
-			const userData = await usersCollection.findOne({
-				email: session.user.email,
-			})
+			const user = await getUser(client, session.user.email)
 
 			return {
 				user: {
-					id: userData._id,
-					email: userData.email,
-					credentialsAccount: userData.credentialsAccount,
+					id: user._id,
+					email: user.email,
+					credentialsAccount: user.credentialsAccount,
 				},
 			}
 		},

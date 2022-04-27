@@ -8,17 +8,17 @@ import styles from './user-profile.module.css'
 const UserProfile = () => {
 	const router = useRouter()
 	const { data: session } = useSession()
-	const [errorMessage, setErrorMessage] = useState(null)
+	const [message, setMessage] = useState(null)
 
 	useEffect(() => {
-		if (errorMessage) {
+		if (message) {
 			const timer = setTimeout(() => {
-				setErrorMessage(null)
+				setMessage(null)
 			}, 3000)
 
 			return () => clearTimeout(timer)
 		}
-	}, [errorMessage])
+	}, [message])
 
 	async function changePasswordHandler(passwordData) {
 		const response = await fetch('/api/user/change-password', {
@@ -32,9 +32,11 @@ const UserProfile = () => {
 		const data = await response.json()
 
 		if (!data.success) {
-			setErrorMessage(
+			setMessage(
 				'There was a problem updating your password. Please check old password and try again.'
 			)
+		} else {
+			setMessage('Password updated successfully!')
 		}
 	}
 
@@ -53,7 +55,7 @@ const UserProfile = () => {
 			signOut()
 			router.replace('/')
 		} else {
-			setErrorMessage(
+			setMessage(
 				'There was a problem deleting your account. Please check email and password and try again.'
 			)
 		}
@@ -68,7 +70,7 @@ const UserProfile = () => {
 				onDeleteAccount={deleteAccountHandler}
 				credentialsAccount={!!session.user.credentialsAccount}
 			/>
-			{errorMessage && <div className={styles.alert}>{errorMessage}</div>}
+			{message && <div className={styles.alert}>{message}</div>}
 		</section>
 	)
 }

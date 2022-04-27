@@ -1,5 +1,9 @@
 import { getSession } from 'next-auth/react'
-import { connectToDatabase } from '../../../lib/db'
+import {
+	connectToDatabase,
+	getUser,
+	updateUserFavorites,
+} from '../../../lib/db'
 
 async function handler(req, res) {
 	if (req.method === 'GET') {
@@ -12,8 +16,7 @@ async function handler(req, res) {
 
 		const userEmail = session.user.email
 		const client = await connectToDatabase()
-		const users = client.db().collection('users')
-		const user = await users.findOne({ email: userEmail })
+		const user = await getUser(client, userEmail)
 
 		if (!user) {
 			res.status(404).json({ message: 'User not found' })
@@ -46,8 +49,7 @@ async function handler(req, res) {
 		const userEmail = session.user.email
 
 		const client = await connectToDatabase()
-		const users = client.db().collection('users')
-		const user = await users.findOne({ email: userEmail })
+		const user = await getUser(client, userEmail)
 
 		if (!user) {
 			res.status(404).json({ message: 'User not found' })
@@ -55,35 +57,12 @@ async function handler(req, res) {
 			return
 		}
 
-		if (!user.favorites) {
-			const result = await users.updateOne(
-				{ email: userEmail },
-				{ $push: { favorites: book } }
-			)
-
-			res.status(200).json({ message: 'Favorites updated' })
-			client.close()
-			return
-		}
-
-		const isFavorite = user.favorites.find(
-			(item) => item.book_id === book.book_id
+		const result = await updateUserFavorites(
+			client,
+			userEmail,
+			user.favorites,
+			book
 		)
-
-		if (!isFavorite) {
-			// add favorite
-			const result = await users.updateOne(
-				{ email: userEmail },
-				{ $push: { favorites: book } }
-			)
-		} else {
-			// remove favorite
-			const result = await users.updateOne(
-				{ email: userEmail },
-				{ $pull: { favorites: book } }
-			)
-		}
-
 		res.status(200).json({ message: 'Favorites updated' })
 		client.close()
 		return

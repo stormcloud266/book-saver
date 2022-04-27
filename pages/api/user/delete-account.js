@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react'
-import { connectToDatabase } from '../../../lib/db'
+import { connectToDatabase, deleteAccount, getUser } from '../../../lib/db'
 import { verifyPassword } from '../../../lib/auth'
 
 async function handler(req, res) {
@@ -22,8 +22,7 @@ async function handler(req, res) {
 	}
 
 	const client = await connectToDatabase()
-	const users = client.db().collection('users')
-	const user = await users.findOne({ email: userEmail })
+	const user = await getUser(client, userEmail)
 
 	if (!user) {
 		res.status(404).json({ message: 'User not found' })
@@ -42,17 +41,16 @@ async function handler(req, res) {
 			client.close()
 			return
 		}
-
-		const result = await users.deleteOne({ email: userEmail })
-		client.close()
-		res.status(200).json({ message: 'Account deleted', success: true })
-	} else {
-		const accounts = client.db().collection('accounts')
-		const accountResult = await accounts.deleteOne({ userId: user._id })
-		const userResult = await users.deleteOne({ email: userEmail })
-		client.close()
-		res.status(200).json({ message: 'Account deleted', success: true })
 	}
+
+	const result = await deleteAccount(
+		client,
+		userEmail,
+		user._id,
+		user.credentialsAccount
+	)
+	client.close()
+	res.status(200).json({ message: 'Account deleted', success: true })
 }
 
 export default handler

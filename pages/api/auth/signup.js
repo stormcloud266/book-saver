@@ -1,6 +1,5 @@
-import { connectToDatabase } from '../../../lib/db'
 import { hashPassword } from '../../../lib/auth'
-import clientPromise from '../../../lib/mongodb'
+import { connectToDatabase, getUser, addUser } from '../../../lib/db'
 
 async function handler(req, res) {
 	// exits if request isn't a POST request
@@ -28,9 +27,7 @@ async function handler(req, res) {
 
 	// connect to mongodb and tries to find existing email
 	const client = await connectToDatabase()
-	const db = client.db()
-
-	const existingUser = await db.collection('users').findOne({ email })
+	const existingUser = await getUser(client, email)
 
 	// sends error status if trying to sign up with an existing email
 	if (existingUser) {
@@ -46,7 +43,7 @@ async function handler(req, res) {
 	const hashedPassword = await hashPassword(password)
 
 	// adds email and password to database
-	const result = await db.collection('users').insertOne({
+	const result = await addUser(client, {
 		email,
 		password: hashedPassword,
 		credentialsAccount: true,

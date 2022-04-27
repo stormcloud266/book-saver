@@ -19,21 +19,21 @@ const ProfileForm = ({ onChangePassword }) => {
 			<h2>Change Password</h2>
 			<form className={styles.form} onSubmit={submitHandler}>
 				<div className={styles.control}>
-					<label htmlFor='new-password'>New Password</label>
-					<input
-						className={styles.input}
-						type='password'
-						id='new-password'
-						ref={newPasswordRef}
-					/>
-				</div>
-				<div className={styles.control}>
 					<label htmlFor='old-password'>Old Password</label>
 					<input
 						className={styles.input}
 						type='password'
 						id='old-password'
 						ref={oldPasswordRef}
+					/>
+				</div>
+				<div className={styles.control}>
+					<label htmlFor='new-password'>New Password</label>
+					<input
+						className={styles.input}
+						type='password'
+						id='new-password'
+						ref={newPasswordRef}
 					/>
 				</div>
 				<div className={styles.action}>

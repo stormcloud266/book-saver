@@ -1,5 +1,5 @@
 import { getSession } from 'next-auth/react'
-import { connectToDatabase } from '../../../lib/db'
+import { connectToDatabase, updateUserPassword, getUser } from '../../../lib/db'
 import { verifyPassword, hashPassword } from '../../../lib/auth'
 
 async function handler(req, res) {
@@ -17,8 +17,7 @@ async function handler(req, res) {
 	const newPassword = req.body.newPassword
 
 	const client = await connectToDatabase()
-	const users = client.db().collection('users')
-	const user = await users.findOne({ email: userEmail })
+	const user = await getUser(client, userEmail)
 
 	if (!user) {
 		res.status(404).json({ message: 'User not found' })
@@ -37,11 +36,7 @@ async function handler(req, res) {
 	}
 
 	const hashedPassword = await hashPassword(newPassword)
-
-	const result = await users.updateOne(
-		{ email: userEmail },
-		{ $set: { password: hashedPassword } }
-	)
+	const result = await updateUserPassword(client, userEmail, hashedPassword)
 
 	client.close()
 	res.status(200).json({ message: 'Password updated', success: true })
