@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import Modal from '../modal/modal'
-import classes from './profile-form.module.css'
+import styles from './profile-form.module.css'
 
 function DeleteForm({ onDeleteAccount, credentialsAccount }) {
 	const passwordRef = useRef()
@@ -23,24 +23,24 @@ function DeleteForm({ onDeleteAccount, credentialsAccount }) {
 
 	return (
 		<>
-			<section className={classes.deleteContainer}>
+			<section className={styles.deleteContainer}>
 				<h2>Delete Account</h2>
-				<form className={classes.form} onSubmit={submitHandler}>
+				<form className={styles.form} onSubmit={submitHandler}>
 					{credentialsAccount && (
 						<>
-							<div className={classes.control}>
+							<div className={styles.control}>
 								<label htmlFor='email'>Email Address</label>
 								<input
-									className={classes.input}
+									className={styles.input}
 									type='email'
 									id='email'
 									ref={emailRef}
 								/>
 							</div>
-							<div className={classes.control}>
+							<div className={styles.control}>
 								<label htmlFor='Password'>Password</label>
 								<input
-									className={classes.input}
+									className={styles.input}
 									type='password'
 									id='password'
 									ref={passwordRef}
@@ -49,7 +49,7 @@ function DeleteForm({ onDeleteAccount, credentialsAccount }) {
 						</>
 					)}
 
-					<div className={classes.action}>
+					<div className={styles.action}>
 						<button className='button warn'>Delete Account</button>
 					</div>
 				</form>

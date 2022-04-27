@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
-import classes from './main-navigation.module.css'
+import styles from './main-navigation.module.css'
 
 function MainNavigation() {
 	const { data: session, status } = useSession()
@@ -12,10 +12,10 @@ function MainNavigation() {
 
 	return (
 		<div className='wrapper'>
-			<header className={classes.header}>
+			<header className={styles.header}>
 				<Link href='/'>
 					<a>
-						<div className={classes.logo}>
+						<div className={styles.logo}>
 							Book<span>Saver</span>
 						</div>
 					</a>
@@ -24,14 +24,14 @@ function MainNavigation() {
 					<ul>
 						<li>
 							<Link href='/'>
-								<a className={classes.link}>Search</a>
+								<a className={styles.link}>Search</a>
 							</Link>
 						</li>
 						{!session && !loading && (
 							<>
 								<li>
-									<Link href='/login' className={classes.link}>
-										<a className={classes.link}>Login</a>
+									<Link href='/login' className={styles.link}>
+										<a className={styles.link}>Login</a>
 									</Link>
 								</li>
 								<li>
@@ -45,12 +45,12 @@ function MainNavigation() {
 							<>
 								<li>
 									<Link href='/favorites'>
-										<a className={classes.link}>Favorites</a>
+										<a className={styles.link}>Favorites</a>
 									</Link>
 								</li>
 								<li>
 									<Link href='/account'>
-										<a className={classes.link}>Account</a>
+										<a className={styles.link}>Account</a>
 									</Link>
 								</li>
 								<li>

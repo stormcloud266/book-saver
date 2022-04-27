@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { useFavorites } from '../../context/favorites-context'
-import classes from './auth-form.module.css'
+import styles from './auth-form.module.css'
 
 async function createUser(email, password) {
 	const response = await fetch('/api/auth/signup', {
@@ -77,15 +77,15 @@ function AuthForm({ isLogin, providers }) {
 	}
 
 	return (
-		<section className={classes.auth}>
+		<section className={styles.auth}>
 			<h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
 
-			<form onSubmit={submitHandler} className={classes.form}>
-				<div className={classes.control}>
+			<form onSubmit={submitHandler} className={styles.form}>
+				<div className={styles.control}>
 					<label htmlFor='email'>Your Email</label>
 					<input type='email' id='email' required ref={emailInputRef} />
 				</div>
-				<div className={classes.control}>
+				<div className={styles.control}>
 					<label htmlFor='password'>Your Password</label>
 					<input
 						type='password'
@@ -95,7 +95,7 @@ function AuthForm({ isLogin, providers }) {
 					/>
 				</div>
 
-				<div className={classes.actions}>
+				<div className={styles.actions}>
 					<button className='button'>
 						{isLogin ? 'Login' : 'Create Account'}
 					</button>
@@ -114,15 +114,15 @@ function AuthForm({ isLogin, providers }) {
 					)}
 
 					<Link href={isLogin ? '/signup' : '/login'}>
-						<a className={classes.link}>
+						<a className={styles.link}>
 							{isLogin ? 'Create new account' : 'Login with existing account'}
 						</a>
 					</Link>
 				</div>
 			</form>
 
-			{loading && <p className={classes.loading}>loading...</p>}
-			{error && <p className={classes.error}>error, please try again</p>}
+			{loading && <p className={styles.loading}>loading...</p>}
+			{error && <p className={styles.error}>error, please try again</p>}
 		</section>
 	)
 }

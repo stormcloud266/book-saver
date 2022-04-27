@@ -3,7 +3,7 @@ import { signOut, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import ProfileForm from './profile-form'
 import DeleteForm from './delete-form'
-import classes from './user-profile.module.css'
+import styles from './user-profile.module.css'
 
 function UserProfile() {
 	const router = useRouter()
@@ -60,7 +60,7 @@ function UserProfile() {
 	}
 
 	return (
-		<section className={classes.profile}>
+		<section className={styles.profile}>
 			{session.user.credentialsAccount && (
 				<ProfileForm onChangePassword={changePasswordHandler} />
 			)}
@@ -68,7 +68,7 @@ function UserProfile() {
 				onDeleteAccount={deleteAccountHandler}
 				credentialsAccount={!!session.user.credentialsAccount}
 			/>
-			{errorMessage && <div className={classes.alert}>{errorMessage}</div>}
+			{errorMessage && <div className={styles.alert}>{errorMessage}</div>}
 		</section>
 	)
 }
