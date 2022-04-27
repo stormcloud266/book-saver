@@ -5,7 +5,7 @@ import ProfileForm from './profile-form'
 import DeleteForm from './delete-form'
 import styles from './user-profile.module.css'
 
-function UserProfile() {
+const UserProfile = () => {
 	const router = useRouter()
 	const { data: session } = useSession()
 	const [errorMessage, setErrorMessage] = useState(null)

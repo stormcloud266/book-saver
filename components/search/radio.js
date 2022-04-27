@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './search.module.css'
 
-export function Radio({ checked, radioHandler, value }) {
+const Radio = ({ checked, radioHandler, value }) => {
 	return (
 		<div className={styles.radioContainer}>
 			<input
@@ -19,3 +19,5 @@ export function Radio({ checked, radioHandler, value }) {
 		</div>
 	)
 }
+
+export default Radio

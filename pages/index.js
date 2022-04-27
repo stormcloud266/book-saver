@@ -8,7 +8,7 @@ import Placeholder from '../components/placeholder/placeholder'
 
 const test = require('../test.json')
 
-function HomePage() {
+const HomePage = () => {
 	const [books, setBooks] = useState(null)
 	const [loading, setLoading] = useState(false)
 	const [error, setError] = useState(false)

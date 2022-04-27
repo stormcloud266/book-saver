@@ -1,5 +1,5 @@
-import { Radio } from './radio'
 import { useRef, useState } from 'react'
+import Radio from './radio'
 import styles from './search.module.css'
 
 const Search = ({ setLoading, setError, setBooks }) => {

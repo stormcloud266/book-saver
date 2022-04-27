@@ -1,8 +1,7 @@
 import { Fragment } from 'react'
-
 import MainNavigation from './main-navigation'
 
-function Layout(props) {
+const Layout = (props) => {
 	return (
 		<Fragment>
 			<MainNavigation />

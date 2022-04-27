@@ -1,7 +1,7 @@
 import { createPortal } from 'react-dom'
 import styles from './modal.module.css'
 
-const Modal = ({ isOpen, closeModal, modalImage, children }) => {
+const Modal = ({ isOpen, children }) => {
 	return isOpen
 		? createPortal(
 				<div className={styles.modal}>

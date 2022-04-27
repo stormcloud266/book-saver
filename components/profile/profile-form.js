@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import styles from './profile-form.module.css'
 
-function ProfileForm({ onChangePassword }) {
+const ProfileForm = ({ onChangePassword }) => {
 	const oldPasswordRef = useRef()
 	const newPasswordRef = useRef()
 

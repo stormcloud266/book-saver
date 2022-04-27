@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
 import styles from './main-navigation.module.css'
 
-function MainNavigation() {
+const MainNavigation = () => {
 	const { data: session, status } = useSession()
 	const loading = status === 'loading'
 

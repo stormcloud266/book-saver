@@ -2,7 +2,7 @@ import { useRef, useState } from 'react'
 import Modal from '../modal/modal'
 import styles from './profile-form.module.css'
 
-function DeleteForm({ onDeleteAccount, credentialsAccount }) {
+const DeleteForm = ({ onDeleteAccount, credentialsAccount }) => {
 	const passwordRef = useRef()
 	const emailRef = useRef()
 	const [modalIsOpen, setModalIsOpen] = useState(false)

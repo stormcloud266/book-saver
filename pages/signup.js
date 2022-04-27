@@ -1,7 +1,7 @@
 import { getProviders, getSession } from 'next-auth/react'
 import AuthForm from '../components/auth/auth-form'
 
-function Signup({ session, providers }) {
+const Signup = ({ session, providers }) => {
 	return <AuthForm session={session} providers={providers} />
 }
 

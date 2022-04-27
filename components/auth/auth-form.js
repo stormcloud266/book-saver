@@ -23,7 +23,7 @@ async function createUser(email, password) {
 	return data
 }
 
-function AuthForm({ isLogin, providers }) {
+const AuthForm = ({ isLogin, providers }) => {
 	const emailInputRef = useRef()
 	const passwordInputRef = useRef()
 	const router = useRouter()
