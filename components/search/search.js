@@ -14,7 +14,7 @@ const Search = ({ setLoading, setError, setBooks }) => {
 		setBooks(undefined)
 
 		const response = await fetch(
-			`http://openlibrary.org/search.json?${
+			`https://openlibrary.org/search.json?${
 				isTitle ? 'title' : 'author'
 			}=${encodeURI(searchRef.current.value)}&limit=20`
 		)
